@@ -24,6 +24,9 @@ public class Calculator {
     private final Map<String, Integer> OPERATORS = new HashMap<>();
     {
         // Map<"token", precedence>
+        OPERATORS.put("root", 1);
+        OPERATORS.put("sqrt", 1);
+        OPERATORS.put("fact", 2);
         OPERATORS.put("^", 2);
         OPERATORS.put("*", 3);
         OPERATORS.put("/", 3);
@@ -148,6 +151,9 @@ public class Calculator {
                     }
                     tokenStack.pop();
                     break;
+                case "sqrt":
+                case "root":
+                case "fact":
                 case "+":
                 case "-":
                 case "*":
@@ -191,13 +197,32 @@ public class Calculator {
             // If the token is an operator, calculate
             if (isOperator(token))
             {
+                double b = 0.0;
                 // Pop the two top entries
                 double a = calcStack.pop();
-                double b = calcStack.pop();
+
+                if (!token.equals("fact") && !token.equals("sqrt")) {
+                 b = calcStack.pop();
+                }
 
                 // Calculate intermediate results
                 switch (token) {
+                    case "sqrt":
+                        result = Math.sqrt(a); 
+                        break;
 
+                    case "root":
+                        result = Math.pow(a, (1/b)); 
+                        break; 
+                    
+                    case "fact":
+                        double c = 1.0;
+                        for (double i = a; i > 1; i--) {
+                            c =  c * i;
+                            result = c;
+                        }
+                        
+                        break;
                     case "+":
                         result = b + a; 
                         break; 
@@ -250,7 +275,7 @@ public class Calculator {
     // Tester method
     public static void main(String[] args) {
         // Random set of test cases
-        Calculator simpleMath = new Calculator("100 + 200  * 3");
+        Calculator simpleMath = new Calculator("fact 3.0");
         System.out.println("Simple Math\n" + simpleMath);
 
         System.out.println();
