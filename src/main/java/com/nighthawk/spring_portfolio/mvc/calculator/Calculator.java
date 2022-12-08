@@ -26,7 +26,7 @@ public class Calculator {
         // Map<"token", precedence>
         OPERATORS.put("root", 1);
         OPERATORS.put("sqrt", 1);
-        OPERATORS.put("fact", 2);
+        OPERATORS.put("!", 2);
         OPERATORS.put("^", 2);
         OPERATORS.put("*", 3);
         OPERATORS.put("/", 3);
@@ -153,7 +153,7 @@ public class Calculator {
                     break;
                 case "sqrt":
                 case "root":
-                case "fact":
+                case "!":
                 case "+":
                 case "-":
                 case "*":
@@ -201,7 +201,7 @@ public class Calculator {
                 // Pop the two top entries
                 double a = calcStack.pop();
 
-                if (!token.equals("fact") && !token.equals("sqrt")) {
+                if (!token.equals("!") && !token.equals("sqrt")) {
                  b = calcStack.pop();
                 }
 
@@ -215,7 +215,7 @@ public class Calculator {
                         result = Math.pow(a, (1/b)); 
                         break; 
                     
-                    case "fact":
+                    case "!":
                         double c = 1.0;
                         for (double i = a; i > 1; i--) {
                             c =  c * i;
@@ -275,7 +275,7 @@ public class Calculator {
     // Tester method
     public static void main(String[] args) {
         // Random set of test cases
-        Calculator simpleMath = new Calculator("fact 3.0");
+        Calculator simpleMath = new Calculator("! 3.0");
         System.out.println("Simple Math\n" + simpleMath);
 
         System.out.println();
