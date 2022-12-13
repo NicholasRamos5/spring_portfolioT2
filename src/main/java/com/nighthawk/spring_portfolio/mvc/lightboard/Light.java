@@ -43,12 +43,34 @@ public class Light {
 
     /* Assign random colors and effects */
     public Light() {
+
         int maxColor = 255;
         int effect = 9;
+        
         this.red = (short) (Math.random()*(maxColor+1));
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
         this.effect = (short) (Math.random()*(effect+1));
+
+        // System.out.println("What red value do you want");
+        // this.red = scanner.nextShort();
+        // System.out.println("What green value do you want");
+        // this.green = scanner.nextShort();
+        // System.out.println("What blue value do you want");
+        // this.blue = scanner.nextShort();
+
+    
+
+       
+
+    }
+
+    
+
+    public void setRGB(short r, short g, short b) {
+        this.red = r;
+        this.green = g;
+        this.blue = b;
     }
 
     public String getEffectTitle() {
@@ -69,13 +91,43 @@ public class Light {
             "\"red\": " + red + "," +
             "\"green\": " +  green + "," + 
             "\"blue\": " + blue + "," +
-            "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" +
+            "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" + "," +
+            "\"on\": " + on + 
             "}" );
+    }
+
+    public boolean isOn() {
+        return this.on;
+    }
+
+    public void setOn(boolean on) {
+        this.on = on;
+    }
+
+    public short getRed() {
+        return red;
+    }
+
+    public short getGreen() {
+        return green;
+    }
+
+    public short getBlue() {
+        return blue;
+    }
+
+    public short getEffect() {
+        return effect;
     }
 
     static public void main(String[] args) {
         // create and display LightBoard
         Light light = new Light();
         System.out.println(light);  // use toString() method
+    }
+
+
+    public Boolean getOn() {
+        return on;
     }
 }
